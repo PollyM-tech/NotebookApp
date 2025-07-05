@@ -34,7 +34,7 @@ class User(db.Model):
 
 
 class Category(db.Model):
-    __tablename__ = "categories"
+    __tablename__ = "my_categories"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text, nullable=False)
@@ -67,11 +67,3 @@ class Entry(db.Model):
     # Relationships
     user = db.relationship("User", back_populates="entries", uselist=False)
 
-
-class Task(db.Model):
-    __tablename__ = "tasks"
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False)
-    status = db.Column(db.String(50), nullable=False)
-    created_at = db.Column(db.TIMESTAMP, default=datetime.now())

@@ -2,10 +2,12 @@ from flask_restful import Resource
 from models import db
 
 class EntryResource(Resource):
-    def get(self, entries_id=None):
-        if entries_id is None:
+    #for category and category id
+    def get(self, entry_id=None):
+        if entry_id == None:
             return {}
         else:
+            #get a single entry
             return{}
     #         entries = Entry.query.all()
     #         return [{
