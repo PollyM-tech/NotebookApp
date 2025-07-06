@@ -33,20 +33,21 @@ class User(db.Model):
     entries = db.relationship("Entry", back_populates="user", cascade="all, delete-orphan")
 
 
-class Category(db.Model):
-    __tablename__ = "my_categories"
+class Category(db.Model, SerializerMixin):
+    __tablename__ = "categories"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text, nullable=False)
     user_id = db.Column(
-        db.Integer,
-        db.ForeignKey("users.id", ondelete="CASCADE"),
-        nullable=True
+        db.Integer, db.ForeignKey("users.id", ondelete="cascade"), nullable=True
     )
     created_at = db.Column(db.TIMESTAMP, default=datetime.now())
 
     # Relationships
     user = db.relationship("User", back_populates="categories", uselist=False)
+    # def to_dict(self):
+    #     return{"id": self.id, "name": self.name, "created_at": self.created_at}
+    serialize_rules = ("-user_id", "-user")
 
 
 class Entry(db.Model):

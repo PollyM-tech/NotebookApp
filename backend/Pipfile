@@ -6,7 +6,7 @@ flask = "*"
 flask_sqlalchemy = "*"
 flask_migrate = "*"
 sqlalchemy_serializer = "*"
-sqlalchemy-serializer = "*"
 python-dotenv = "*"
+sqlalchemy-serializer = "*"
 
 [dev-packages]
