@@ -3,7 +3,9 @@ from sqlalchemy import MetaData
 from sqlalchemy_serializer import SerializerMixin
 from datetime import datetime
 
-# Naming convention for Alembic (migrations)
+# helps sqlalchemy provide a consistent naming convention for constraints
+# such as primary keys, foreign keys, indexes, etc.
+# this is useful for migrations and debugging
 naming_convention = {
     "ix": "ix_%(column_0_label)s",
     "uq": "uq_%(table_name)s_%(column_0_name)s",
@@ -55,11 +57,7 @@ class Entry(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     note = db.Column(db.Text, nullable=False)
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey("users.id", ondelete="CASCADE"),
-        nullable=False
-    )
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id", ondelete="CASCADE"),nullable=False)
     category_id = db.Column(db.Integer,db.ForeignKey("categories.id", ondelete="SET NULL"),nullable=True)
     created_at = db.Column(db.TIMESTAMP, default=datetime.now())
     updated_at = db.Column(db.TIMESTAMP, onupdate=datetime.now())
